@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mosinstall type="component">
    <name>cbmailing</name>
-   <creationDate>2006-04-11</creationDate>
+   <creationDate>2007-05-28</creationDate>
    <author>Erik Happaerts</author>
-   <copyright>Copyright 2006 Erik Happaerts / Guus Koning. This component is released under the GNU/GPL License. The component is based on the Joomla! Massmail code.</copyright>
+   <copyright>copyright (c) 2006 - Erik Happaerts / Guus Koning. This component is released under the GNU/GPL License and parts under Community Builder Free License. All copyright statements must be kept and derivate work must prominently duly acknowledge original work on web interface and on website where downloaded. The component is based on the Joomla! Massmail code.</copyright>
    <authorEmail>joomla@happaerts.be</authorEmail>
    <authorUrl>www.happaerts.be</authorUrl>
-   <version>1.0</version>
-   <description>Mailing component for Community Builder.</description>
+   <version>1.1</version>
+   <description>Mailing component for Community Builder. (Turns Community Builder-lists into mailinglists)</description>
    <files>
     </files>
    <install>

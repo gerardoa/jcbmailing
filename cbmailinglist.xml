@@ -7,7 +7,7 @@
    <authorEmail>joomla@happaerts.be</authorEmail>
    <authorUrl>http://www.happaerts.be</authorUrl>
    <version>1.0</version>
-   <description>Mailing component for Community Builder. (Turns 'Community Builder'-lists into mailinglists)</description>
+   <description>Mailing component for Community Builder. (Turns Community Builder-lists into mailinglists)</description>
    <files>
    </files>
    <install>
