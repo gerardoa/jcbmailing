@@ -12,5 +12,14 @@ class TOOLBAR_cbmailing {
 		mosMenuBar::cancel();
 		mosMenuBar::endTable();
 	}
+
+	function _PERMISSIONS() {
+		mosMenuBar::startTable();
+		mosMenuBar::save('addPerm');
+		mosMenuBar::deleteList('The permission will be deleted and cannot be undone!','delPerm');
+		mosMenuBar::spacer();
+		mosMenuBar::cancel();
+		mosMenuBar::endTable();
+	}
 }
 ?>
