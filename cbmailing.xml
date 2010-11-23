@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mosinstall type="component">
+  <name>CbMailing</name>
+  <creationDate>2 July 2007</creationDate>
+  <author>Erik Happaerts, Guus Koning, Mark Bradley</author>
+  <copyright>GNU/GPL</copyright>
+  <authorEmail>cbmailing@happaerts.be</authorEmail>
+  <authorUrl>www.happaerts.de</authorUrl>
+  <version>2.0</version>
+  <description>Mailinglists for Community Builder</description>
+  <files>
+    <filename>cbmailing.php</filename>
+    <filename>cbmailing.html.php</filename>
+    <filename>index.html</filename>
+  </files>
+  <install>
+    <queries>
+      <query>
+			CREATE TABLE IF NOT EXISTS `#__cbmailing_permissions` (
+			`id` int( 11 ) NOT NULL AUTO_INCREMENT,
+			`toid` int(11) NOT NULL default '0',
+			`fromid` int(11) NOT NULL default '0',
+			PRIMARY KEY  (`id`)
+			) TYPE=MyISAM;
+      </query>
+    </queries>
+  </install>
+  <installfile>install.cbmailing.php</installfile>
+  <uninstallfile>uninstall.cbmailing.php</uninstallfile>
+  <administration>
+    <menu>CbMailing</menu>
+    <submenu>
+      <menu task="mailing">Send mailing</menu>
+      <menu task="permissions">Manage permissions</menu>
+    </submenu>
+    <files>
+      <filename>admin.cbmailing.php</filename>
+      <filename>admin.cbmailing.html.php</filename>
+      <filename>install.cbmailing.php</filename>
+      <filename>uninstall.cbmailing.php</filename>
+      <filename>toolbar.cbmailing.html.php</filename>
+      <filename>toolbar.cbmailing.php</filename>
+    </files>
+  </administration>
+</mosinstall>
