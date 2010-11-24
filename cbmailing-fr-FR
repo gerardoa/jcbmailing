@@ -1,31 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<install type="component" version="1.5">
+<mosinstall type="component">
   <name>CbMailing</name>
-  <creationDate>14 April 2009</creationDate>
-  <author>Mark Bradley, Erik Happaerts, Guus Koning</author>
+  <creationDate>27 February 2009</creationDate>
+  <author>Erik Happaerts, Guus Koning, Mark Bradley</author>
   <copyright>GNU/GPL</copyright>
   <authorEmail>mrcb@cbmailing.org</authorEmail>
   <authorUrl>www.cbmailing,org</authorUrl>
   <version>2.3.4J1.5</version>
-  <description>Mailinglists for Community Builder</description>
-
-  <!-- Frontend / main File Copy Section -->
+  <description>Courriel listes pour Community Builder</description>
   <files>
     <filename>cbmailing.php</filename>
     <filename>cbmailing.html.php</filename>
     <filename>index.html</filename>
-	<!-- filename>language/default_language/default_language.php</filename>
+	<filename>language/default_language/default_language.php</filename>
 	<filename>language/default_language/index.html</filename>
 	<filename>language/french/french.php</filename>
-	<filename>language/french/index.html</filename -->
+	<filename>language/french/index.html</filename>
   </files>
-
-  <!-- Frontend Language File Copy Section -->
-  <languages folder="languages">
-    <language tag="en-GB">en-GB.com_cbmailing.ini</language>
-	<language tag="fr-FR">fr-FR.com_cbmailing.ini</language>
-  </languages>
-
   <install>
     <queries>
       <query>
@@ -38,16 +29,14 @@
       </query>
     </queries>
   </install>
-
   <installfile>install.cbmailing.php</installfile>
   <uninstallfile>uninstall.cbmailing.php</uninstallfile>
-
   <administration>
-    <menu>CbMailing</menu>
+    <menu>CbMailing (fr-FR).</menu>
     <submenu>
-      <menu task="mailing">Send mailing</menu>
-      <menu task="permissions">Manage permissions</menu>
-      <menu task="configure">Configure</menu>
+      <menu task="mailing">Envoyer Courriel</menu>
+      <menu task="permissions">Etablissement des Permissions</menu>
+      <menu task="configure">Configuration</menu>
     </submenu>
     <files>
       <filename>admin.cbmailing.php</filename>
@@ -61,11 +50,5 @@
       <filename>toolbar.cbmailing.html.php</filename>
       <filename>toolbar.cbmailing.php</filename>
     </files>
-	<!-- Backend Language File Copy Section -->
-	  <languages folder="languages">
-		<language tag="en-GB">en-GB.com_cbmailing.ini</language>
-		<language tag="fr-FR">fr-FR.com_cbmailing.ini</language>
-	  </languages>
-
   </administration>
-</install>
+</mosinstall>
