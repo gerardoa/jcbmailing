@@ -1,0 +1,54 @@
+<?xml version="1.1" encoding="UTF-8"?>
+<project name="Joomla CBmailing" basedir="." default="copy_to_test">
+ 
+ 		<property name="compname" value="cbmailing" override="true" />
+        <property name="test" value="../joomla1.5" override="true" />
+        <property name="testcomp" value="${test}/components/com_${compname}" override="true" />
+        <property name="testadmincomp" value="${test}/administrator/components/com_${compname}" override="true" />
+        <property name="src" value="${project.basedir}" override="true" />
+        
+        <fileset dir="${src}/site" id="component_files">
+                <include name="**" />
+        </fileset>
+        <fileset dir="${src}/admin" id="component_admin_files">
+                <include name="**" />
+        </fileset>
+        
+        <fileset dir="${src}" id="allfiles">
+                <include name="admin/**" />
+                <include name="site/**" />
+                <include name="languages/**" />
+                <include name="${compname}.xml" />
+                
+                <include name="install.cbmailing.php" />
+                <include name="uninstall.cbmailing.php" />
+        </fileset>
+ 
+        <!-- Copy Target -->
+        <target name="copy_to_test" description="copy target">
+                <echo>Copying files from dev to test...
+                </echo>
+                <copy todir="${testadmincomp}">
+                        <fileset refid="component_admin_files" />
+                </copy>
+                <copy file="${src}/${compname}.xml" todir="${testadmincomp}" />
+                <!-- Language files -->
+                <copy file="${src}/languages/en-GB.com_${compname}.ini" todir="${test}/administrator/language/en-GB" />
+                
+                <echo msg="Copying site files if needed..." />
+                <copy todir="${testcomp}">
+                        <fileset refid="component_files" />
+                </copy>
+                <!-- Archiving -->
+                <delete file="${src}/com_${compname}_dev.zip" />
+                <zip destfile="${src}/com_${compname}_dev.zip">
+                        <fileset refid="allfiles" />
+                </zip>
+                <!--
+                <delete file="${src}/com_${compname}_dev.tar.gz" />
+                <tar destfile="${src}/com_${compname}_dev.tar.gz" compression="gzip">
+                        <fileset refid="allfiles" />
+                </tar>
+                -->
+        </target>
+</project>
