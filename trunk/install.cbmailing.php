@@ -10,8 +10,6 @@
 
 function com_install ()
 {
-	mosRedirect("index2.php?option=com_cbmailing","CbMailing Successfully Installed");
-
 	$url = "index2.php?option=com_cbmailing";
 	$msg = "CbMailing Successfully Installed";
 	$app = &JFactory::getApplication();	// J1.5

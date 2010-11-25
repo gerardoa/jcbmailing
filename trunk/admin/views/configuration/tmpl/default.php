@@ -1,7 +1,11 @@
-function configureForm( &$cbMailingConfig, $configWritable, $option ) {
-		$numCols = 2;
-		$colSizes[0] = 'width="200px"';
-		$colSizes[1] = '';
+<?php 
+// no direct access
+defined( '_JEXEC' ) or die( 'Restricted access' );
+global $option;
+$cbMailingConfig = $this->cbMailingConfig;
+$numCols = 2;
+$colSizes[0] = 'width="200px"';
+$colSizes[1] = '';
 ?>
 		<script language="javascript" type="text/javascript">
 			function submitbutton(pressbutton) {
@@ -322,5 +326,3 @@ function configureForm( &$cbMailingConfig, $configWritable, $option ) {
 		<input type="hidden" name="option" value="<?php echo $option; ?>"/>
 		<input type="hidden" name="task" value=""/>
 		</form>
-<!--<?php
-	}
