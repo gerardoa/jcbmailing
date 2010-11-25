@@ -186,126 +186,14 @@ defined( '_JEXEC' ) or die( 'Restricted Access' );
 		return $database->loadObjectList();
 	}
 
-//	/* ............................................................................. */
-//	// New function in V2.3.0
-//	function listMembers( $group, $includeAllAddresses, $emailFieldList )
-//	{
-//		// global $database;	// J1.0
-//		// global $acl;			// J1.0
-//		$database = &JFactory::getDBO();	// J1.5
-//		$acl	=& JFactory::getACL();		// J1.5
-//
-//		if ($this->cbMailingConfig == NULL) {
-//			$this->readConfig();
-//		}
-//
-//		$query = "SELECT usergroupids,filterfields FROM #__comprofiler_lists WHERE listid = $group";
-//		$database->setQuery( $query );
-//		$filterby = $database->loadResult();
-//		$groupResults = $database->loadObjectList();
-//		$filterby = $groupResults[0]->filterfields;
-//		$userGroupIds = $groupResults[0]->usergroupids;
-///*
-//echo "<pre>\n";
-//echo "group=";
-//var_dump( $group );
-//echo "\nquery=";
-//var_dump( $query );
-//echo "\ngroupResults=";
-//var_dump( $groupResults );
-//echo "\nfilterby=";
-//var_dump( $filterby );
-//echo "\nuserGroupIds=";
-//var_dump( $userGroupIds );
-//echo "</pre>\n";
-//*/
-//
-//		// V2.2 - find the fields that are e-mail addresses
-//		$extraEmailFields = "";
-//		if ( $includeAllAddresses && ( $emailFieldList != NULL)) {
-//			if (count( $emailFieldList ) > 0) {
-//				foreach ($emailFieldList as $field) {
-//					$extraEmailFields .= ",". $field->name;
-//				}
-//			}
-//		}
-///*
-//echo "<pre>\n";
-//echo "includeAllAddresses=";
-//var_dump( $includeAllAddresses );
-//echo "\nextraEmailFields=";
-//var_dump( $extraEmailFields );
-//echo "</pre>\n";
-//*/
-//		$allusergids=array();
-//		$usergids=explode(",",$userGroupIds);
-//		if (count( $usergids ) > 0) {
-//			foreach($usergids AS $usergid) {
-//				$allusergids[]=$usergid;
-//
-//				// 29 is the GID for the front end, 30 is the GID for the backend
-//				if ($usergid==29 || $usergid==30) {
-//					$groupchildren = array();
-//					$groupchildren = $acl->get_group_children( $usergid, 'ARO','RECURSE' );
-//					$allusergids = array_merge($allusergids,$groupchildren);
-//				}
-//
-//			}
-//		}
-//		$usergids = "-1";
-//		$usergids=implode(",",$allusergids);
-//
-///*
-//$query = "SELECT COUNT(*) FROM #__users u, #__comprofiler ue WHERE u.id=ue.id AND u.block !=1 AND ue.approved=1 AND ue.banned!=1 AND ue.confirmed=1 AND u.gid IN (".$usergids.")";
-//echo "<pre>\n";
-//echo "usergids=";
-//var_dump( $usergids );
-//echo "\nquery=";
-//var_dump( $query );
-//echo "</pre>\n";
-//*/
-//
-//		// Get all users email
-//		//$query = "SELECT email FROM #__users u, #__comprofiler ue WHERE u.id=ue.id AND u.block!=1 and ue.approved=1 AND ue.banned!=1 AND ue.confirmed=1";
-//		$query = "SELECT u.id AS id,name,username,email". $extraEmailFields ." FROM #__users u, #__comprofiler ue WHERE u.id=ue.id and ue.approved=1 AND ue.banned!=1 AND ue.confirmed=1".
-//					" AND u.gid IN (". $usergids .")";
-//		//$query = "SELECT * FROM #__users u, #__comprofiler ue WHERE u.id=ue.id and ue.approved=1 AND ue.banned!=1 AND ue.confirmed=1";
-//		if (! $this->cbMailingConfig["incBlocked"])
-//		{
-//			$query .= " AND u.block!=1";
-//		}
-//
-//		$selection = $this->utf8RawUrlDecode(substr($filterby,1));
-///*
-//echo "<pre>\n";
-//echo "selection=";
-//var_dump( $selection );
-//echo "\nquery=";
-//var_dump( $query );
-//echo "</pre>\n";
-//*/
-//		// MRCB 20070618 2110 change from "if (!$selection === null) {" to.....
-//		if ($selection != "") {
-//			$query .= " AND " . $selection;
-//		}
-//
-//		$database->setQuery( $query );
-//		return $database->loadObjectList();
-//	}
+
 
 	/* ............................................................................. */
 	function sendMail() {
-		// global $database;	// J1.0
-		// global $acl;			// J1.0
-		// global $my;			// J1.0
 		$database 	= &JFactory::getDBO();	// J1.5
 		$acl		= &JFactory::getACL();	// J1.5
 		$my 		= &JFactory::getUser();	// J1.5
 
-		// MRCB 20070619 2233 - added in mosConfig_absolute_path
-		// global $mosConfig_sitename;	// J1.0
-		// global $mosConfig_absolute_path;	// J1.0
-		// global $mosConfig_mailfrom, $mosConfig_fromname;	// J1.0
 		global $mainframe;	// For J1.5
 
 		if ($this->cbMailingConfig == NULL) {
@@ -320,39 +208,28 @@ defined( '_JEXEC' ) or die( 'Restricted Access' );
 		}
 		// For security reasons, we should check that the user is permitted to send to this list
 
-		/* J1.0
-		$mode				= mosGetParam( $_POST, 'mm_mode', 0 );
-		$subject			= mosGetParam( $_POST, 'mm_subject', '' );
-		$group				= mosGetParam( $_POST, 'mm_group', NULL );
-		*/
 
 		// J1.5
 		$mode				= JRequest::getVar( 'mm_mode', 0, "post" );
 		$subject			= JRequest::getVar( 'mm_subject', '', "post" );
 		$group				= JRequest::getVar( 'mm_group', NULL, "post" );
-	//	$recurse			= mosGetParam( $_POST, 'mm_recurse', 'NO_RECURSE' );
 
 		// pulls message information either in text or html format
 		if ( $mode ) {
 			$message_body	= $_POST['mm_message'];
 		} else {
 			// automatically removes html formatting
-			// $message_body	= mosGetParam( $_POST, 'mm_message', '' );	// J1.0
 			$message_body	= JRequest::getVar( 'mm_message', '', 'post' );	// J1.5
 		}
+		
 		$message_body 		= stripslashes( $message_body );
 		
 		if (!$message_body || !$subject || $group === null) {
 			$problem = "";
-			//if (!$message_body) $problem .= " No message body;";
 			if (!$message_body) $problem .= " ". JText::_( 'CB_MAILING_NOMESSAGEBODY' );
-			//if (!$subject) $problem .= " No subject;";
 			if (!$subject) $problem .= " ". JText::_( 'CB_MAILING_NOSUBJECT' );
-			// if ($group === null) $problem .= "No group selected;";
 			if ($group === null) $problem .= JText::_( 'CB_MAILING_NOGROUP' );
-			//mosRedirect( 'index.php?option=com_cbmailing&mosmsg=Please fill in the form correctly: '. $problem );
-			$url = $redirectScript .'?option=com_cbmailing&mosmsg='. JText::_( 'CB_MAILING_FILLFORMCORRECTLY' ) .' '. $problem;
-			// mosRedirect( $url );	// J1.0
+			
 			$url = $redirectScript .'?option=com_cbmailing';
 			$msg = JText::_( 'CB_MAILING_FILLFORMCORRECTLY' ) .' '. $problem;
 			$app = &JFactory::getApplication();	// J1.5
@@ -378,29 +255,26 @@ defined( '_JEXEC' ) or die( 'Restricted Access' );
 			$msg = JText::_( 'CB_MAILING_NOPERMISSION' );
 		} else {
 
-			// MRCB 20070619 2233 - added from here......
 			$attachment = NULL;
 			if (isset( $_FILES['mm_attach'] )) {
 				if (file_exists($_FILES['mm_attach']['tmp_name'])) {
 					$uploadDir = "uploads";
 					// Does the upload dir exist?
-					// if (! file_exists($mosConfig_absolute_path ."/". $uploadDir))	// J1.0
+					
 					if (! file_exists( JPATH_SITE.DS. $uploadDir ))
 					{
 						// No, so create it
-						// if (! mkdir($mosConfig_absolute_path ."/". $uploadDir))	// J1.0
+						
 						if (! mkdir( JPATH_SITE.DS. $uploadDir ))
 						{
 							// Couldn't create it, so set it to be blank
 							$uploadDir = "";
 						}
 					}
-					// else if (! is_writable($mosConfig_absolute_path ."/". $uploadDir))	// J1.0
 					else if (! is_writable( JPATH_SITE.DS. $uploadDir ))
 					{
 						// It's not writeable, so we'll create our own
 						$uploadDir = "cbmailing_uploads";
-						// if (! mkdir($mosConfig_absolute_path ."/". $uploadDir))	// J1.0
 						if (! mkdir( JPATH_SITE.DS. $uploadDir ))
 						{
 							// Couldn't create it, so set it to be blank
@@ -409,7 +283,6 @@ defined( '_JEXEC' ) or die( 'Restricted Access' );
 					}
 					if ($uploadDir != "")
 					{
-						// $uploadfile = $mosConfig_absolute_path . "/". $uploadDir ."/". basename($_FILES['mm_attach']['name']);	// J1.0
 						$uploadfile = JPATH_SITE.DS. $uploadDir .DS. basename($_FILES['mm_attach']['name']);
 						if (move_uploaded_file($_FILES['mm_attach']['tmp_name'], $uploadfile)) {
 							$attachment = $uploadfile;
@@ -417,7 +290,6 @@ defined( '_JEXEC' ) or die( 'Restricted Access' );
 					}
 				}
 			}
-			// MRCB 20070619 2233 - .............to here
 
 			// Get sending email address
 			$query = "SELECT email FROM #__users WHERE id=". $database->Quote( $my->id );
@@ -661,6 +533,7 @@ exit;
 					@unlink($uploadfile);
 				}
 			}
+			//TODO: SE C'E' UN ERRORE LO ESEGUE LO STESSO??
 			$msg = JText::_( 'CB_MAILING_EMAILSENTTOXUSERS' ) .' '. $successCount  
 					.' ('. JText::_( 'CB_MAILING_EMAILSENTTOXUSERSTOTAL' ) ." ". count( $rows ) 
 					. (count( $rows ) != $sendToCount ? '/'. $sendToCount : '')

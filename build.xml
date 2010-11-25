@@ -17,7 +17,7 @@
         <fileset dir="${src}" id="allfiles">
                 <include name="admin/**" />
                 <include name="site/**" />
-                <include name="languages/**" />
+                <include name="language/**" />
                 <include name="${compname}.xml" />
                 
                 <include name="install.cbmailing.php" />
@@ -33,7 +33,7 @@
                 </copy>
                 <copy file="${src}/${compname}.xml" todir="${testadmincomp}" />
                 <!-- Language files -->
-                <copy file="${src}/languages/en-GB.com_${compname}.ini" todir="${test}/administrator/language/en-GB" />
+                <copy file="${src}/language/en-GB.com_${compname}.ini" todir="${test}/administrator/language/en-GB" />
                 
                 <echo msg="Copying site files if needed..." />
                 <copy todir="${testcomp}">
@@ -50,5 +50,12 @@
                         <fileset refid="allfiles" />
                 </tar>
                 -->
+        </target>
+        
+        <target name="deltest_folders" description="deletes joomla admin and site folders (needed before installation))">
+        	<delete dir="${testadmincomp}" />
+        	<delete dir="${testcomp}" />
+        	<delete file="${test}/administrator/language/en-GB/en-GB.com_cbmailing.ini" />
+        	<delete file="${test}/language/en-GB/en-GB.com_cbmailing.ini" />
         </target>
 </project>

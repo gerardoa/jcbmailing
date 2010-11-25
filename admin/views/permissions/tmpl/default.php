@@ -1,5 +1,9 @@
-function permissionsForm( &$lists, $option ) {
-?>-->
+<?php 
+// no direct access
+defined( '_JEXEC' ) or die( 'Restricted access' );
+global $option;
+$lists = $this->lists; 
+?>		
 		<script language="javascript" type="text/javascript">
 			function submitbutton(pressbutton) {
 				var form = document.adminForm;
@@ -108,5 +112,3 @@ function permissionsForm( &$lists, $option ) {
 		<input type="hidden" name="option" value="<?php echo $option; ?>"/>
 		<input type="hidden" name="task" value=""/>
 		</form>
-<?php
-	}

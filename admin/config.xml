@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<params>			
+		<param name="cbMailingConfig_feAllowAtt" type="radio" label="CB_MAILING_ADMIN_CONFIGFEALLOWATT" description="CB_MAILING_ADMIN_CONFIGFEALLOWATT">
+			<option value="0">No</option>
+			<option value="1">Yes</option>
+		</param>
+		
+		<param name="cbMailingConfig_feAllowHTML" type="radio" label="CB_MAILING_ADMIN_CONFIGFEALLOWHTML" description="CB_MAILING_ADMIN_CONFIGFEALLOWHTML">
+			<option value="0">No</option>
+			<option value="1">Yes</option>
+		</param>
+		
+		<param name="cbMailingConfig_feAllowSigOver" type="radio" label="CB_MAILING_ADMIN_CONFIGFEALLOWSIGOVER" description="CB_MAILING_ADMIN_CONFIGFEALLOWSIGOVER">
+			<option value="0">No</option>
+			<option value="1">Yes</option>
+		</param>
+		
+		<param name="cbMailingConfig_mmMethod" type="radio" label="CB_MAILING_ADMIN_CONFIGMMMETHOD" description="CB_MAILING_ADMIN_CONFIGMMMETHOD">
+			<option value="1">CB_MAILING_ADMIN_CONFIGMMMETHOD1</option>
+			<option value="2">CB_MAILING_ADMIN_CONFIGMMMETHOD2</option>
+		</param>
+		
+		<param name="cbMailingConfig_mmFrom" type="radio" label="CB_MAILING_ADMIN_CONFIGMMFROM" description="CB_MAILING_ADMIN_CONFIGMMFROM">
+			<option value="0">CB_MAILING_ADMIN_CONFIGMMFROM1</option>
+			<option value="1">CB_MAILING_ADMIN_CONFIGMMFROM2</option>
+		</param>		
+		<param type="text" name="cbMailingConfig_mmFromAddr" size="50" label="CB_MAILING_ADMIN_CONFIGMMFROMLABEL" description="CB_MAILING_ADMIN_CONFIGMMFROMLABEL" />
+		<param type="text" name="cbMailingConfig_mmFromDesc" size="50" label="CB_MAILING_ADMIN_CONFIGMMFROMLABEL" description="CB_MAILING_ADMIN_CONFIGMMFROMLABEL" />
+
+		<param name="cbMailingConfig_mmReplyTo" type="radio" label="CB_MAILING_ADMIN_CONFIGMMREPLYTO" description="CB_MAILING_ADMIN_CONFIGMMREPLYTO">
+			<option value="1">CB_MAILING_ADMIN_CONFIGMMREPLYTO1</option>
+			<option value="2">CB_MAILING_ADMIN_CONFIGMMREPLYTO2</option>
+			<option value="2">CB_MAILING_ADMIN_CONFIGMMREPLYTO3</option>
+		</param>		
+		<param type="text" name="cbMailingConfig_mmReplyToAddr" size="50" label="CB_MAILING_ADMIN_CONFIGMMREPLYTOLABEL" description="CB_MAILING_ADMIN_CONFIGMMREPLYTOLABEL" />
+		<param type="text" name="cbMailingConfig_mmReplyToDesc" size="50" label="CB_MAILING_ADMIN_CONFIGMMREPLYTOLABEL" description="CB_MAILING_ADMIN_CONFIGMMREPLYTOLABEL" />
+		
+		<param name="cbMailingConfig_mmTo" type="radio" label="CB_MAILING_ADMIN_CONFIGMMTO" description="CB_MAILING_ADMIN_CONFIGMMTO">
+			<option value="0">CB_MAILING_ADMIN_CONFIGMMTO1</option>
+			<option value="1">CB_MAILING_ADMIN_CONFIGMMTO2</option>
+		</param>		
+		<param type="text" name="cbMailingConfig_mmToAddr" size="50" label="CB_MAILING_ADMIN_CONFIGMMTOLABEL" description="CB_MAILING_ADMIN_CONFIGMMTOLABEL" />
+		<param type="text" name="cbMailingConfig_mmToDesc" size="50" label="CB_MAILING_ADMIN_CONFIGMMTOLABEL" description="CB_MAILING_ADMIN_CONFIGMMTOLABEL" />
+		
+		
+		<param name="cbMailingConfig_mmBCC" type="radio" label="CB_MAILING_ADMIN_CONFIGMMBCC" description="CB_MAILING_ADMIN_CONFIGMMBCC">
+			<option value="1">CB_MAILING_ADMIN_CONFIGMMBCC1</option>
+			<option value="2">CB_MAILING_ADMIN_CONFIGMMBCC2</option>
+		</param>		
+		<param type="text" name="cbMailingConfig_mmBCCAddr" size="50" label="CB_MAILING_ADMIN_CONFIGMMBCC3" description="CB_MAILING_ADMIN_CONFIGMMBCC3" />
+		<param type="text" name="cbMailingConfig_mmBCCDesc" size="50" label="CB_MAILING_ADMIN_CONFIGMMBCC3" description="CB_MAILING_ADMIN_CONFIGMMBCC3" />
+		
+		<param name="cbMailingConfig_allAddr" type="radio" label="CB_MAILING_ADMIN_CONFIGALLADDR" description="CB_MAILING_ADMIN_CONFIGALLADDR">
+			<option value="0">No</option>
+			<option value="1">Yes</option>
+		</param>
+		
+		<param name="cbMailingConfig_signature" type="textarea" default="" label="CB_MAILING_ADMIN_CONFIGSIGNATURE" rows="10" cols="80" description="CB_MAILING_ADMIN_CONFIGSIGNATURE" />
+			
+		<param name="cbMailingConfig_incBlocked" type="radio" label="CB_MAILING_ADMIN_CONFIGINCBLOCK" description="CB_MAILING_ADMIN_CONFIGINCBLOCK">
+			<option value="0">No</option>
+			<option value="1">Yes</option>
+		</param>
+		
+		<!-- Debugging  -->
+		
+		<param name="cbMailingConfig_debug" type="radio" label="CB_MAILING_ADMIN_CONFIGDEBUG" description="CB_MAILING_ADMIN_CONFIGDEBUG">
+			<option value="0">No</option>
+			<option value="1">Yes</option>
+		</param>		
+		<param type="text" name="cbMailingConfig_debugFromAddr" size="50" label="CB_MAILING_ADMIN_CONFIGDEBUGFROM CB_MAILING_ADMIN_CONFIGDEBUGFROMLABEL" description="CB_MAILING_ADMIN_CONFIGDEBUGFROMLABEL" />
+		<param type="text" name="cbMailingConfig_debugFromDesc" size="50" label="CB_MAILING_ADMIN_CONFIGDEBUGFROM CB_MAILING_ADMIN_CONFIGDEBUGFROMLABEL" description="CB_MAILING_ADMIN_CONFIGDEBUGFROMLABEL" />
+		
+		<param type="text" name="cbMailingConfig_debugToAddr" size="50" label="CB_MAILING_ADMIN_CONFIGDEBUGTO CB_MAILING_ADMIN_CONFIGDEBUGTOLABEL" description="CB_MAILING_ADMIN_CONFIGDEBUGTOLABEL" />
+		<param type="text" name="cbMailingConfig_debugToDesc" size="50" label="CB_MAILING_ADMIN_CONFIGDEBUGTO CB_MAILING_ADMIN_CONFIGDEBUGTOLABEL" description="CB_MAILING_ADMIN_CONFIGDEBUGTOLABEL" />
+		
+		<param type="text" name="cbMailingConfig_debugETitle" size="50" label="CB_MAILING_ADMIN_CONFIGDEBUGETITLE" description="CB_MAILING_ADMIN_CONFIGDEBUGETITLE" />
+	</params>
+</config>

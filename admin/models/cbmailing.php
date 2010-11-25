@@ -116,6 +116,34 @@ class CbmailingModelCbmailing extends JModel
 
 		return $this->_getList($query);
 	}
+	
+	function getToLists2() {
+		// get list of groups as destinations
+		$query = 'SELECT listid AS value, title AS text ' .
+		         'FROM #__comprofiler_lists ' .
+		         'WHERE published=1 ' .
+		         'ORDER BY ordering';
+		return $this->_getList($query);
+	}
+	
+	function getFromLists() {
+		// get list of groups for those allowed to send (includes unpublished lists)
+		$query = 'SELECT listid AS value, title AS text ' .
+		         'FROM #__comprofiler_lists ' .
+		         'ORDER BY ordering';
+		return $this->_getList($query);
+	}
+	
+	function getPermissions() {
+		// list of existing permissions
+		$query = 'SELECT a.id as id, b1.title as totitle, b2.title as fromtitle ' .
+				 'FROM #__cbmailing_permissions as a, ' . 
+				 '     #__comprofiler_lists     as b1,' .
+		         '     #__comprofiler_lists     as b2 ' .
+				 'WHERE a.toid   = b1.listid ' .
+				 '  AND a.fromid = b2.listid ';
+		return $this->_getList($query);
+	}
 
 	// this works on the list filter field
 	function utf8RawUrlDecode ($source) {

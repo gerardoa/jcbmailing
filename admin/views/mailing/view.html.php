@@ -9,7 +9,7 @@ class CbmailingViewMailing extends JView
 		JToolBarHelper::publish('send', JText::_('CB_MAILING_ADMIN_SENDBUTTONTEXT'));
 		JToolBarHelper::spacer();
 		JToolBarHelper::cancel();
-		JToolBarHelper::preferences( 'com_campioni', 600, 700 );
+		JToolBarHelper::preferences( 'com_cbmailing', 600, 700 );
 
 		$this->messageForm();
 		

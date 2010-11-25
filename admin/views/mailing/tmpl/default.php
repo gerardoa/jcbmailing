@@ -1,4 +1,5 @@
-<?php defined('_JEXEC') or die('Restricted access');
+<?php 
+defined('_JEXEC') or die('Restricted access');
 global $option;
 ?>
 
@@ -46,7 +47,7 @@ global $option;
 				<?php echo JText::_( 'CB_MAILING_GROUPTEXT' ) ?>
 			</td>
 			<td width="85%">
-				<?php echo $lists['gid']; ?>
+				<?php echo $this->lists['gid']; ?>
 			</td>
 		</tr>
 		<tr>
