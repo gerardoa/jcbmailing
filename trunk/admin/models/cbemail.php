@@ -12,7 +12,7 @@ class CbmailingModelCbemail extends JModel
 	var $fromEmail;
 	var $fromName;
 	var $emailFieldList;
-	var $recievers;
+	var $recipients;
 	var $messageBody;
 	var $bbcName;
 	var $bbcEmail;
@@ -34,9 +34,11 @@ class CbmailingModelCbemail extends JModel
 	}
 
 	function populate() {
+		$app = JFactory::getApplication();
 		$this->checkRequest();
 		if($this->getError()) {
-			$this->setError(JText::_( 'CB_MAILING_FILLFORMCORRECTLY' ));
+			JError::raiseNotice(0, JText::_( 'CB_MAILING_FILLFORMCORRECTLY' ));
+			foreach ($this->_errors as $error) $app->enqueueMessage($error);
 			return false;
 		}
 
@@ -44,30 +46,30 @@ class CbmailingModelCbemail extends JModel
 
 		$this->parametersOptions();
 
-		$this->getReciervers();
+		$this->getRecipients();
 
 		$this->buildMessage();
 
-		$this->sendEmail();
-
+		return true;
 	}
 
 	function checkRequest() {
-		$this->mode   	= JRequest::getVar( 'mm_mode', 0, "post" );
-		$subject	    = JRequest::getVar( 'mm_subject', '', "post" );
-		$this->$group	= JRequest::getVar( 'mm_group', NULL, "post" );
+		$app = JFactory::getApplication();
+		$this->mode   	= JRequest::getInt( 'mm_mode', 0, 'post' );
+		$subject	    = JRequest::getString( 'mm_subject', '', 'post' );
+		$this->group	= JRequest::getInt( 'mm_group', null, 'post' );
 		// pulls message information either in text or html format
-		$message_body = ($mode) ? $_POST['mm_message'] : JRequest::getVar( 'mm_message', '', 'post' );
+		$message_body = ($mode) ? JRequest::getString('mm_message', '', 'POST', JREQUEST_ALLOWHTML ) : JRequest::getString( 'mm_message', '', 'post' );
+		//TODO: why?
 		$this->messageBody = stripslashes( $message_body );
 
 		if (!$this->messageBody) $this->setError(JText::_( 'CB_MAILING_NOMESSAGEBODY' ));
 		if (!$subject) {
 			$this->setError(JText::_( 'CB_MAILING_NOSUBJECT' ));
 		} else {
-			$app = JFactory::getApplication();
 			$this->subject = $app->getCfg('sitename') .' / '. stripslashes( $subject);	// J1.5
 		}
-		if ($this->$group === null) $this->setError(JText::_( 'CB_MAILING_NOGROUP' ));
+		if ($this->group === null) $this->setError(JText::_( 'CB_MAILING_NOGROUP' ));
 	}
 
 	function manageAttachement() {
@@ -108,7 +110,7 @@ class CbmailingModelCbemail extends JModel
 		}
 	}
 
-	function getReciervers() {
+	function getRecipients() {
 		// Copy the config value so that in future we might allow more complex derivation of whether to send to all, such as controlled per user
 		$includeAllAddresses = $this->params->get('cbMailingConfig_allAddr'); //$this->cbMailingConfig["allAddr"];
 		if ( $includeAllAddresses ) {
@@ -120,13 +122,14 @@ class CbmailingModelCbemail extends JModel
 		$model = new CbmailingModelCbmailing();
 		$cbUsers = $model->listMembers($this->group, $includeAllAddresses, $this->emailFieldList);
 
-		if ( $includeAllAddresses ) {
-			foreach ($cbUsers as $cbUser) {
-				$this->recievers[] = $cbUser->email;
+
+		foreach ($cbUsers as $cbUser) {
+			$this->recipients[] = $cbUser->email;
+			if ( $includeAllAddresses ) {
 				// look for more email for this user
 				foreach ($emailFieldList as $field) {
 					if ( !empty($cbUser->{$field->name})) {
-						$this->recievers[] = $cbUser->{$field->name};
+						$this->recipients[] = $cbUser->{$field->name};
 					}
 				}
 			}
@@ -152,7 +155,7 @@ class CbmailingModelCbemail extends JModel
 				break;
 
 			case 2:	// List addresses
-				$this->bccEmail  = $this->recievers;
+				$this->bccEmail  = $this->recipients;
 				$this->bbcName  = "";
 				break;
 
@@ -163,19 +166,23 @@ class CbmailingModelCbemail extends JModel
 				break;
 		}
 
-		if ($p->get('cbMailingConfig_mmTo')) {
+		if ($p->get('cbMailingConfig_mmTo') === 2) {
 			$this->debugReceiverEmail = $p->get('cbMailingConfig_mmToAddr');
 			$this->debugReceiverName  = $p->get('cbMailingConfig_mmToDesc');
 			// this is strange
-			$this->recievers = $this->debugReceiverEmail;
+			$this->recipients = $this->debugReceiverEmail;
 		}
 
-		if ($p->get('cbMailingConfig_mmFrom')) {
-			$this->fromEmail = $p->get('cbMailingConfig_mmFromAddr');
-			$this->fromName  = $p->get('cbMailingConfig_mmFromDesc');
-		} else {
-			$this->fromName = $user->name;
-			$this->fromEmail = $user->email;
+		switch ($p->get('cbMailingConfig_mmFrom'))
+		{
+			case 1:
+				$this->fromName = $user->name;
+				$this->fromEmail = $user->email;
+				break;
+			case 2:
+				$this->fromEmail = $p->get('cbMailingConfig_mmFromAddr');
+				$this->fromName  = $p->get('cbMailingConfig_mmFromDesc');					
+				break;
 		}
 
 		switch ( $p->get('cbMailingConfig_mmReplyTo') )

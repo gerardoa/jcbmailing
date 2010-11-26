@@ -27,7 +27,7 @@ global $option;
 			}
 		</script>
 
-		<form action="index2.php" name="adminForm" method="post" enctype="multipart/form-data">
+		<form action="index.php" name="adminForm" method="post" enctype="multipart/form-data">
 		<table class="adminheading">
 		<tr>
 			<th class="massemail">
@@ -63,7 +63,7 @@ global $option;
 			<?php echo JText::_( 'CB_MAILING_SUBJECTTEXT' ) ?>
 			</td>
 			<td>
-				<input class="inputbox" type="text" name="mm_subject" value="" size="50"/>
+				<input class="inputbox" type="text" name="mm_subject" value="<?php echo $this->subject; ?>" size="50"/>
 			</td>
 		</tr>
 <?php
@@ -86,7 +86,7 @@ global $option;
 			<?php echo JText::_( 'CB_MAILING_MESSAGETEXT' ) ?>
 			</td>
 			<td>
-			<textarea cols="80" rows="24" name="mm_message" class="inputbox"><?php echo $signature; ?></textarea>
+			<textarea cols="80" rows="24" name="mm_message" class="inputbox"><?php echo $this->message . "\r\n\r\n" . $signature; ?></textarea>
 			</td>
 		</tr>
 		</table>
