@@ -49,15 +49,6 @@ $colSizes[1] = '';
 				<?php echo JText::_( 'CB_MAILING_ADMIN_CONFIGTITLE' ) ?>
 			</th>
 		</tr>
-		<tr>
-			<td>
-				<?php
-				if (! $configWritable ) {
-					echo JText::_( 'CB_MAILING_ADMIN_CONFIGNOTWRITABLE' );
-				}
-				?>
-			</td>
-		</tr>
 		</table>
 
 		<table class="adminform">
@@ -71,7 +62,7 @@ $colSizes[1] = '';
 				<?php echo JText::_( 'CB_MAILING_ADMIN_CONFIGFEALLOWATT' ) ?>
 			</td>
 			<td <?php echo $colSizes[1] ?>>
-				<input type="checkbox" name="cbMailingConfig_feAllowAtt" <?php echo ($cbMailingConfig["feAllowAtt"] ? "checked" : "") ?> />
+				<input type="checkbox" name="params[cbMailingConfig_feAllowAtt]" <?php echo ($cbMailingConfig["feAllowAtt"] ? "checked" : "") ?> />
 			</td>
 		</tr>
 		<tr>
@@ -79,7 +70,7 @@ $colSizes[1] = '';
 				<?php echo JText::_( 'CB_MAILING_ADMIN_CONFIGFEALLOWHTML' ) ?>
 			</td>
 			<td <?php echo $colSizes[1] ?>>
-				<input type="checkbox" name="cbMailingConfig_feAllowHTML" <?php echo ( $cbMailingConfig["feAllowHTML"] ? "checked" : "")  ?> />
+				<input type="checkbox" name="params[cbMailingConfig_feAllowHTML]" <?php echo ( $cbMailingConfig["feAllowHTML"] ? "checked" : "")  ?> />
 			</td>
 		</tr>
 		<tr>
@@ -87,7 +78,7 @@ $colSizes[1] = '';
 				<?php echo JText::_( 'CB_MAILING_ADMIN_CONFIGFEALLOWSIGOVER' ) ?>
 			</td>
 			<td <?php echo $colSizes[1] ?>>
-				<input type="checkbox" name="cbMailingConfig_feAllowSigOver" <?php echo ( $cbMailingConfig["feAllowSigOver"] ? "checked" : "") ?> />
+				<input type="checkbox" name="params[cbMailingConfig_feAllowSigOver]" <?php echo ( $cbMailingConfig["feAllowSigOver"] ? "checked" : "") ?> />
 			</td>
 		</tr>
 		<tr>
@@ -142,12 +133,12 @@ $colSizes[1] = '';
 				<?php echo JText::_( 'CB_MAILING_ADMIN_CONFIGMMMETHOD' ) ?>
 			</td>
 			<td <?php echo $colSizes[1] ?>>
-				<input type="radio" name="cbMailingConfig_mmMethod" value="1"<?php
+				<input type="radio" name="params[cbMailingConfig_mmMethod]" value="1"<?php
 				if ($cbMailingConfig["mmMethod"] == "1") {
 					echo " checked";
 				}
 				?>><?php echo JText::_( 'CB_MAILING_ADMIN_CONFIGMMMETHOD1' ) ?><br />
-				<input type="radio" name="cbMailingConfig_mmMethod" value="2"<?php
+				<input type="radio" name="params[cbMailingConfig_mmMethod]" value="2"<?php
 				if ($cbMailingConfig["mmMethod"] == "2") {
 					echo " checked";
 				}
@@ -160,19 +151,19 @@ $colSizes[1] = '';
 				<?php echo JText::_( 'CB_MAILING_ADMIN_CONFIGMMFROM' ) ?>
 			</td>
 			<td <?php echo $colSizes[1] ?>>
-				<input type="radio" name="cbMailingConfig_mmFrom" value="1"<?php
+				<input type="radio" name="params[cbMailingConfig_mmFrom]" value="1"<?php
 				if ($cbMailingConfig["mmFrom"] == "1") {
 					echo " checked";
 				}
 				?>><?php echo JText::_( 'CB_MAILING_ADMIN_CONFIGMMFROM1' ) ?><br />
-				<input type="radio" name="cbMailingConfig_mmFrom" value="2"<?php
+				<input type="radio" name="params[cbMailingConfig_mmFrom]" value="2"<?php
 				if ($cbMailingConfig["mmFrom"] == "2") {
 					echo " checked";
 				}
 				?>><?php echo JText::_( 'CB_MAILING_ADMIN_CONFIGMMFROM2' ) ?><br />
 				<?php echo JText::_( 'CB_MAILING_ADMIN_CONFIGMMFROMLABEL' ) ?><br />
-				<input type="text" name="cbMailingConfig_mmFromAddr" size="50" value="<?php echo $cbMailingConfig["mmFromAddr"] ?>">
-				<input type="text" name="cbMailingConfig_mmFromDesc" size="50" value="<?php echo $cbMailingConfig["mmFromDesc"] ?>">
+				<input type="text" name="params[cbMailingConfig_mmFromAddr]" size="50" value="<?php echo $cbMailingConfig["mmFromAddr"] ?>">
+				<input type="text" name="params[cbMailingConfig_mmFromDesc]" size="50" value="<?php echo $cbMailingConfig["mmFromDesc"] ?>">
 			</td>
 		</tr>
 		<?php $rowID = 1 - $rowID; ?>
@@ -181,24 +172,24 @@ $colSizes[1] = '';
 				<?php echo JText::_( 'CB_MAILING_ADMIN_CONFIGMMREPLYTO' ) ?>
 			</td>
 			<td <?php echo $colSizes[1] ?>>
-				<input type="radio" name="cbMailingConfig_mmReplyTo" value="1"<?php
+				<input type="radio" name="params[cbMailingConfig_mmReplyTo]" value="1"<?php
 				if ($cbMailingConfig["mmReplyTo"] == "1") {
 					echo " checked";
 				}
 				?>><?php echo JText::_( 'CB_MAILING_ADMIN_CONFIGMMREPLYTO1' ) ?><br />
-				<input type="radio" name="cbMailingConfig_mmReplyTo" value="2"<?php
+				<input type="radio" name="params[cbMailingConfig_mmReplyTo]" value="2"<?php
 				if ($cbMailingConfig["mmReplyTo"] == "2") {
 					echo " checked";
 				}
 				?>><?php echo JText::_( 'CB_MAILING_ADMIN_CONFIGMMREPLYTO2' ) ?><br />
-				<input type="radio" name="cbMailingConfig_mmReplyTo" value="3"<?php
+				<input type="radio" name="params[cbMailingConfig_mmReplyTo]" value="3"<?php
 				if ($cbMailingConfig["mmReplyTo"] == "3") {
 					echo " checked";
 				}
 				?>><?php echo JText::_( 'CB_MAILING_ADMIN_CONFIGMMREPLYTO3' ) ?><br />
 				<?php echo JText::_( 'CB_MAILING_ADMIN_CONFIGMMREPLYTOLABEL' ) ?><br />
-				<input type="text" name="cbMailingConfig_mmReplyToAddr" size="50" value="<?php echo $cbMailingConfig["mmReplyToAddr"] ?>">
-				<input type="text" name="cbMailingConfig_mmReplyToDesc" size="50" value="<?php echo $cbMailingConfig["mmReplyToDesc"] ?>">
+				<input type="text" name="params[cbMailingConfig_mmReplyToAddr]" size="50" value="<?php echo $cbMailingConfig["mmReplyToAddr"] ?>">
+				<input type="text" name="params[cbMailingConfig_mmReplyToDesc]" size="50" value="<?php echo $cbMailingConfig["mmReplyToDesc"] ?>">
 			</td>
 		</tr>
 		<?php $rowID = 1 - $rowID; ?>
@@ -207,19 +198,19 @@ $colSizes[1] = '';
 				<?php echo JText::_( 'CB_MAILING_ADMIN_CONFIGMMTO' ) ?>
 			</td>
 			<td <?php echo $colSizes[1] ?>>
-				<input type="radio" name="cbMailingConfig_mmTo" value="1"<?php
+				<input type="radio" name="params[cbMailingConfig_mmTo]" value="1"<?php
 				if ($cbMailingConfig["mmTo"] == "1") {
 					echo " checked";
 				}
 				?>><?php echo JText::_( 'CB_MAILING_ADMIN_CONFIGMMTO1' ) ?><br />
-				<input type="radio" name="cbMailingConfig_mmTo" value="2"<?php
+				<input type="radio" name="params[cbMailingConfig_mmTo]" value="2"<?php
 				if ($cbMailingConfig["mmTo"] == "2") {
 					echo " checked";
 				}
 				?>><?php echo JText::_( 'CB_MAILING_ADMIN_CONFIGMMTO2' ) ?><br />
 				<?php echo JText::_( 'CB_MAILING_ADMIN_CONFIGMMTOLABEL' ) ?><br />
-				<input type="text" name="cbMailingConfig_mmToAddr" size="50" value="<?php echo $cbMailingConfig["mmToAddr"] ?>">
-				<input type="text" name="cbMailingConfig_mmToDesc" size="50" value="<?php echo $cbMailingConfig["mmToDesc"] ?>">
+				<input type="text" name="params[cbMailingConfig_mmToAddr]" size="50" value="<?php echo $cbMailingConfig["mmToAddr"] ?>">
+				<input type="text" name="params[cbMailingConfig_mmToDesc]" size="50" value="<?php echo $cbMailingConfig["mmToDesc"] ?>">
 			</td>
 		</tr>
 		<?php $rowID = 1 - $rowID; ?>
@@ -228,24 +219,24 @@ $colSizes[1] = '';
 				<?php echo JText::_( 'CB_MAILING_ADMIN_CONFIGMMBCC' ) ?>
 			</td>
 			<td <?php echo $colSizes[1] ?>>
-				<input type="radio" name="cbMailingConfig_mmBCC" value="1"<?php
+				<input type="radio" name="params[cbMailingConfig_mmBCC]" value="1"<?php
 				if ($cbMailingConfig["mmBCC"] == "1") {
 					echo " checked";
 				}
 				?>><?php echo JText::_( 'CB_MAILING_ADMIN_CONFIGMMBCC1' ) ?><br />
-				<input type="radio" name="cbMailingConfig_mmBCC" value="2"<?php
+				<input type="radio" name="params[cbMailingConfig_mmBCC]" value="2"<?php
 				if ($cbMailingConfig["mmBCC"] == "2") {
 					echo " checked";
 				}
 				?>><?php echo JText::_( 'CB_MAILING_ADMIN_CONFIGMMBCC2' ) ?><br />
-				<input type="radio" name="cbMailingConfig_mmBCC" value="3"<?php
+				<input type="radio" name="params[cbMailingConfig_mmBCC]" value="3"<?php
 				if ($cbMailingConfig["mmBCC"] == "3") {
 					echo " checked";
 				}
 				?>><?php echo JText::_( 'CB_MAILING_ADMIN_CONFIGMMBCC3' ) ?><br />
 				<?php echo JText::_( 'CB_MAILING_ADMIN_CONFIGMMBCCLABEL' ) ?><br />
-				<input type="text" name="cbMailingConfig_mmBCCAddr" size="50" value="<?php echo $cbMailingConfig["mmBCCAddr"] ?>">
-				<input type="text" name="cbMailingConfig_mmBCCDesc" size="50" value="<?php echo $cbMailingConfig["mmBCCDesc"] ?>">
+				<input type="text" name="params[cbMailingConfig_mmBCCAddr]" size="50" value="<?php echo $cbMailingConfig["mmBCCAddr"] ?>">
+				<input type="text" name="params[cbMailingConfig_mmBCCDesc]" size="50" value="<?php echo $cbMailingConfig["mmBCCDesc"] ?>">
 			</td>
 		</tr>
 		<?php $rowID = 1 - $rowID; ?>
@@ -254,7 +245,7 @@ $colSizes[1] = '';
 				<?php echo JText::_( 'CB_MAILING_ADMIN_CONFIGALLADDR' ) ?>
 			</td>
 			<td <?php echo $colSizes[1] ?>>
-				<input type="checkbox" name="cbMailingConfig_allAddr" <?php echo ( $cbMailingConfig["allAddr"] ? "checked" : "")  ?> />
+				<input type="checkbox" name="params[cbMailingConfig_allAddr]" <?php echo ( $cbMailingConfig["allAddr"] ? "checked" : "")  ?> />
 			</td>
 		</tr>
 		<?php $rowID = 1 - $rowID; ?>
@@ -263,7 +254,7 @@ $colSizes[1] = '';
 				<?php echo JText::_( 'CB_MAILING_ADMIN_CONFIGSIGNATURE' ) ?>
 			</td>
 			<td <?php echo $colSizes[1] ?>>
-				<textarea cols="80" rows="10" name="cbMailingConfig_signature" class="inputbox"><?php echo $cbMailingConfig["signature"] ?></textarea>
+				<textarea cols="80" rows="10" name="params[cbMailingConfig_signature]" class="inputbox"><?php echo $cbMailingConfig["signature"] ?></textarea>
 			</td>
 		</tr>
 		<?php $rowID = 1 - $rowID; ?>
@@ -272,7 +263,7 @@ $colSizes[1] = '';
 				<?php echo JText::_( 'CB_MAILING_ADMIN_CONFIGINCBLOCK' ) ?>
 			</td>
 			<td <?php echo $colSizes[1] ?>>
-				<input type="checkbox" name="cbMailingConfig_incBlocked" <?php echo ( $cbMailingConfig["incBlocked"] ? "checked" : "") ?> />
+				<input type="checkbox" name="params[cbMailingConfig_incBlocked]" <?php echo ( $cbMailingConfig["incBlocked"] ? "checked" : "") ?> />
 			</td>
 		</tr>
 		<tr>
@@ -286,7 +277,7 @@ $colSizes[1] = '';
 				<?php echo JText::_( 'CB_MAILING_ADMIN_CONFIGDEBUG' ) ?>
 			</td>
 			<td <?php echo $colSizes[1] ?>>
-				<input type="checkbox" name="cbMailingConfig_debug" <?php echo ( $cbMailingConfig["debug"] ? "checked" : "") ?> />
+				<input type="checkbox" name="params[cbMailingConfig_debug]" <?php echo ( $cbMailingConfig["debug"] ? "checked" : "") ?> />
 			</td>
 		</tr>
 		<?php $rowID = 1 - $rowID; ?>
@@ -296,8 +287,8 @@ $colSizes[1] = '';
 			</td>
 			<td <?php echo $colSizes[1] ?>>
 				<?php echo JText::_( 'CB_MAILING_ADMIN_CONFIGDEBUGFROMLABEL' ) ?><br />
-				<input type="text" name="cbMailingConfig_debugFromAddr" size="50" value="<?php echo $cbMailingConfig["debugFromAddr"] ?>">
-				<input type="text" name="cbMailingConfig_debugFromDesc" size="50" value="<?php echo $cbMailingConfig["debugFromDesc"] ?>">
+				<input type="text" name="params[cbMailingConfig_debugFromAddr]" size="50" value="<?php echo $cbMailingConfig["debugFromAddr"] ?>">
+				<input type="text" name="params[cbMailingConfig_debugFromDesc]" size="50" value="<?php echo $cbMailingConfig["debugFromDesc"] ?>">
 			</td>
 		</tr>
 		<?php $rowID = 1 - $rowID; ?>
@@ -307,8 +298,8 @@ $colSizes[1] = '';
 			</td>
 			<td <?php echo $colSizes[1] ?>>
 				<?php echo JText::_( 'CB_MAILING_ADMIN_CONFIGDEBUGTOLABEL' ) ?><br />
-				<input type="text" name="cbMailingConfig_debugToAddr" size="50" value="<?php echo $cbMailingConfig["debugToAddr"] ?>">
-				<input type="text" name="cbMailingConfig_debugToDesc" size="50" value="<?php echo $cbMailingConfig["debugToDesc"] ?>">
+				<input type="text" name="params[cbMailingConfig_debugToAddr]" size="50" value="<?php echo $cbMailingConfig["debugToAddr"] ?>">
+				<input type="text" name="params[cbMailingConfig_debugToDesc]" size="50" value="<?php echo $cbMailingConfig["debugToDesc"] ?>">
 			</td>
 		</tr>
 		<?php $rowID = 1 - $rowID; ?>
@@ -317,12 +308,19 @@ $colSizes[1] = '';
 				<?php echo JText::_( 'CB_MAILING_ADMIN_CONFIGDEBUGETITLE' ) ?>
 			</td>
 			<td <?php echo $colSizes[1] ?>>
-				<input type="text" name="cbMailingConfig_debugETitle" size="50" value ="<?php echo $cbMailingConfig["debugETitle"] ?>">
+				<input type="text" name="params[cbMailingConfig_debugETitle]" size="50" value ="<?php echo $cbMailingConfig["debugETitle"] ?>">
 			</td>
 		</tr>
 		</table>
 
 		<input type="hidden" value="0" name="boxchecked"/>
 		<input type="hidden" name="option" value="<?php echo $option; ?>"/>
-		<input type="hidden" name="task" value=""/>
+		
+<!--		<input type="hidden" name="id" value="echo $this->component->id;" />-->
+		<input type="hidden" name="component" value="<?php echo 'com_cbmailing';?>" />
+		<input type="hidden" name="controller" value="component" />
+<!--		<input type="hidden" name="option" value="com_config" />-->
+		<input type="hidden" name="tmpl" value="component" />
+		<input type="hidden" name="task" value="" />
+		<?php echo JHTML::_( 'form.token' ); ?>
 		</form>

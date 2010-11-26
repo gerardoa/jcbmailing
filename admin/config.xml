@@ -22,8 +22,8 @@
 		</param>
 		
 		<param name="cbMailingConfig_mmFrom" type="radio" label="CB_MAILING_ADMIN_CONFIGMMFROM" description="CB_MAILING_ADMIN_CONFIGMMFROM">
-			<option value="0">CB_MAILING_ADMIN_CONFIGMMFROM1</option>
-			<option value="1">CB_MAILING_ADMIN_CONFIGMMFROM2</option>
+			<option value="1">CB_MAILING_ADMIN_CONFIGMMFROM1</option>
+			<option value="2">CB_MAILING_ADMIN_CONFIGMMFROM2</option>
 		</param>		
 		<param type="text" name="cbMailingConfig_mmFromAddr" size="50" label="CB_MAILING_ADMIN_CONFIGMMFROMLABEL" description="CB_MAILING_ADMIN_CONFIGMMFROMLABEL" />
 		<param type="text" name="cbMailingConfig_mmFromDesc" size="50" label="CB_MAILING_ADMIN_CONFIGMMFROMLABEL" description="CB_MAILING_ADMIN_CONFIGMMFROMLABEL" />
@@ -37,8 +37,8 @@
 		<param type="text" name="cbMailingConfig_mmReplyToDesc" size="50" label="CB_MAILING_ADMIN_CONFIGMMREPLYTOLABEL" description="CB_MAILING_ADMIN_CONFIGMMREPLYTOLABEL" />
 		
 		<param name="cbMailingConfig_mmTo" type="radio" label="CB_MAILING_ADMIN_CONFIGMMTO" description="CB_MAILING_ADMIN_CONFIGMMTO">
-			<option value="0">CB_MAILING_ADMIN_CONFIGMMTO1</option>
-			<option value="1">CB_MAILING_ADMIN_CONFIGMMTO2</option>
+			<option value="1">CB_MAILING_ADMIN_CONFIGMMTO1</option>
+			<option value="2">CB_MAILING_ADMIN_CONFIGMMTO2</option>
 		</param>		
 		<param type="text" name="cbMailingConfig_mmToAddr" size="50" label="CB_MAILING_ADMIN_CONFIGMMTOLABEL" description="CB_MAILING_ADMIN_CONFIGMMTOLABEL" />
 		<param type="text" name="cbMailingConfig_mmToDesc" size="50" label="CB_MAILING_ADMIN_CONFIGMMTOLABEL" description="CB_MAILING_ADMIN_CONFIGMMTOLABEL" />
@@ -46,7 +46,8 @@
 		
 		<param name="cbMailingConfig_mmBCC" type="radio" label="CB_MAILING_ADMIN_CONFIGMMBCC" description="CB_MAILING_ADMIN_CONFIGMMBCC">
 			<option value="1">CB_MAILING_ADMIN_CONFIGMMBCC1</option>
-			<option value="2">CB_MAILING_ADMIN_CONFIGMMBCC2</option>
+			<option value="2">CB_MAILING_ADMIN_CONFIGMMBCC2</option>			
+			<option value="3">CB_MAILING_ADMIN_CONFIGMMBCC3</option>
 		</param>		
 		<param type="text" name="cbMailingConfig_mmBCCAddr" size="50" label="CB_MAILING_ADMIN_CONFIGMMBCC3" description="CB_MAILING_ADMIN_CONFIGMMBCC3" />
 		<param type="text" name="cbMailingConfig_mmBCCDesc" size="50" label="CB_MAILING_ADMIN_CONFIGMMBCC3" description="CB_MAILING_ADMIN_CONFIGMMBCC3" />

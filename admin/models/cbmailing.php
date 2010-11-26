@@ -11,20 +11,21 @@ class CbmailingModelCbmailing extends JModel
 		parent::__construct();
 		$this->params = JComponentHelper::getParams( 'com_cbmailing' );
 	}
-	
-	function getToLists($toList) {
+
+	function getToLists() {
+		$toList = $this->getListOfOkayToGroups();
 		$query = "SELECT listid AS value, title AS text" .
 					" FROM #__comprofiler_lists" .
 					" WHERE published=1" . 
 					" AND (";
-			$listids = "";
-			$db = $this->getDBO();
-			foreach (array_keys($toList) as $thisList) {
-				$listids .= ($listids == "" ? "" : " OR " ) .
+		$listids = "";
+		$db = $this->getDBO();
+		foreach (array_keys($toList) as $thisList) {
+			$listids .= ($listids == "" ? "" : " OR " ) .
 							" listid=". $db->Quote( $thisList );
-			}
-			$query .= $listids .") ORDER BY ordering";
-			return  $this->_getList($query);
+		}
+		$query .= $listids .") ORDER BY ordering";
+		return  $this->_getList($query);
 	}
 
 
@@ -47,10 +48,10 @@ class CbmailingModelCbmailing extends JModel
 					// User was a member, so add permission from list to list so far (to display)
 					$toList[$permission->toid] = 1;
 					break;
-				}					
+				}
 			}
 		}
-		
+
 		return $toList;
 
 	}
@@ -62,7 +63,7 @@ class CbmailingModelCbmailing extends JModel
 		$acl	=& JFactory::getACL();		// J1.5
 
 		// RECUPERA IL usergroupids e il filtro DATO L'ID di una lista
-		$query = "SELECT usergroupids,filterfields " . 
+		$query = "SELECT usergroupids,filterfields " .
 				" FROM #__comprofiler_lists" .
 				" WHERE listid = $group";
 		$groupResults = $this->_getList($query);
@@ -116,7 +117,7 @@ class CbmailingModelCbmailing extends JModel
 
 		return $this->_getList($query);
 	}
-	
+
 	function getToLists2() {
 		// get list of groups as destinations
 		$query = 'SELECT listid AS value, title AS text ' .
@@ -125,7 +126,7 @@ class CbmailingModelCbmailing extends JModel
 		         'ORDER BY ordering';
 		return $this->_getList($query);
 	}
-	
+
 	function getFromLists() {
 		// get list of groups for those allowed to send (includes unpublished lists)
 		$query = 'SELECT listid AS value, title AS text ' .
@@ -133,7 +134,7 @@ class CbmailingModelCbmailing extends JModel
 		         'ORDER BY ordering';
 		return $this->_getList($query);
 	}
-	
+
 	function getPermissions() {
 		// list of existing permissions
 		$query = 'SELECT a.id as id, b1.title as totitle, b2.title as fromtitle ' .
@@ -142,6 +143,48 @@ class CbmailingModelCbmailing extends JModel
 		         '     #__comprofiler_lists     as b2 ' .
 				 'WHERE a.toid   = b1.listid ' .
 				 '  AND a.fromid = b2.listid ';
+		return $this->_getList($query);
+	}
+
+	function getMembers( ) {
+		$ids = JRequest::getVar( 'ids', null, 'post', 'array' );
+		JArrayHelper::toInteger($ids, 0);
+
+		if (count( $ids ) > 0) {
+
+			$lists['groupData'] = array();
+			$lists['includeAll'] = $this->params->get('cbMailingConfig_allAddr');
+			$emailFieldList = NULL;
+			if ( $lists['includeAll'] ) {
+				$emailFieldList = $this->extraAddressFields();
+			}
+			$lists['emailFieldList'] = $emailFieldList;
+
+			foreach ($ids as $pid) {
+				// get list of existing permissions
+				$query = 'SELECT p.id as id, p.toid as toid, l1.title as totitle, p.fromid as fromid, l2.title as fromtitle
+						FROM #__cbmailing_permissions as p ,' .
+						'    #__comprofiler_lists     as l1,' .
+				        '    #__comprofiler_lists     as l2 ' . 
+						'WHERE p.toid   = l1.listid ' .
+				 	    '  AND p.fromid = l2.listid ' . 
+				 	    '  AND p.id     = '. $pid;
+				$data = array();
+				$data['permission']  = $this->_getList($query);
+				$data['fromMembers'] = $this->listMembers( $data['permission'][0]->fromid, false,                $emailFieldList );
+				$data['toMembers']   = $this->listMembers( $data['permission'][0]->toid,   $lists['includeAll'], $emailFieldList );
+				$data['fromCount']   = count($data['fromMembers']);
+				$data['toCount']     = count($data['toMembers']);
+				$lists['groupData'][$pid] = $data;
+			}
+			return $lists;
+		}
+	}
+	
+	function extraAddressFields() {
+		$query = 'SELECT name ' .
+				 'FROM #__comprofiler_fields ' .
+		         'WHERE type = emailaddress';
 		return $this->_getList($query);
 	}
 
